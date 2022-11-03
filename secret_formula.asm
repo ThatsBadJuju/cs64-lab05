@@ -154,7 +154,7 @@ secret_formula_apply:
 
     mflo $t1
     move $t3 $a2 #t3 = result of each iteration of pow(m,e)
-    li $t4 0 #t4 = iteration counter
+    li $t4 1 #t4 = iteration counter
 
     jal loop_apply
     move $t3 $v0
@@ -173,7 +173,7 @@ secret_formula_remove:
     mult $a0 $a1
     mflo $t1
     move $t3 $a2 #t3 = result of each iteration of pow(m,e)
-    li $t4 0 #t4 = iteration counter
+    li $t4 1 #t4 = iteration counter
    
     jal loop_apply
     move $t3 $v0
