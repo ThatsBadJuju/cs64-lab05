@@ -99,7 +99,7 @@ main_2:
     li $v0 4
     la $a0 decrypted
     syscall
-    li $t0 0
+    li $t0 1
     move $t3 $s3
     lw $a0 0($t3)
     li $v0 1
