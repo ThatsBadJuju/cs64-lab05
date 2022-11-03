@@ -6,10 +6,15 @@ carray: .word 0:10
 
 marray: .word 0:10
 
-beginningtest: .asciiz "start loop\n"
-printtest: .asciiz "printing 1\n"
-printtest2: .asciiz "printing 2\n"
-printloop: .asciiz "printed\n"
+# beginningtest: .asciiz "start loop\n"
+# printtest: .asciiz "printing 1\n"
+# printtest2: .asciiz "printing 2\n"
+# printloop: .asciiz "printed\n"
+
+encrypted: .asciiz "Encrypted: "
+decrypted: .asciiz "Decrypted: "
+comma: .asciiz ", "
+newline: .asciiz "\n"
 
 .text
 main:
@@ -78,28 +83,39 @@ loop_main:
 
 
 main_2:
-    li $t0 0
+    li $t0 1
     li $t1 10
     li $t2 4
 
-    # li $v0 4
-    # la $a0 printtest
-    # syscall
-
+    li $v0 4
+    la $a0 encrypted
+    syscall
+    move $t3 $s2
+    lw $a0 0($t3)
+    li $v0 1
+    syscall
     jal print_c_arr
 
+    li $v0 4
+    la $a0 decrypted
+    syscall
     li $t0 0
-
-    # li $v0 4
-    # la $a0 printtest2
-    # syscall
-
+    move $t3 $s3
+    lw $a0 0($t3)
+    li $v0 1
+    syscall
     jal print_m_arr
 
     j exit
 
+
 print_c_arr:
     beq $t0 $t1 c_arr_exit
+
+    li $v0 4
+    la $a0 comma
+    syscall
+
     mult $t0 $t2
     mflo $t3
     addu $t3 $t3 $s2
@@ -116,15 +132,20 @@ print_c_arr:
 
 c_arr_exit:
 
-    # li $v0 1
-    # move $a0 $t1
-    # syscall
+    li $v0 4
+    la $a0 newline
+    syscall
 
     jr $ra
 
 
 print_m_arr:
     beq $t0 $t1 m_arr_exit
+
+    li $v0 4
+    la $a0 comma
+    syscall
+
     mult $t0 $t2
     mflo $t3
     addu $t3 $t3 $s3
