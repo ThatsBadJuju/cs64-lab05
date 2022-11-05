@@ -1,6 +1,6 @@
 .data
 
-krabby: .word 1 2 3 4 5 6 7 8 9 10
+krabby: .word 3 5 1 0 0 0 0 7 3 21
 
 carray: .word 0:10
 
